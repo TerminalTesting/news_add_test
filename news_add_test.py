@@ -90,22 +90,22 @@ class NewsAddTest(unittest.TestCase):
 	#проверяем дату публикации на странице новостей
         if time.strftime("%d-%m-%Y") != last_news.find_element_by_tag_name('time').get_attribute('datetime').strip():
             cnt += 1
-            print 'Некорректная дата публикации, нужно - ', time.strftime("%d-%m-%Y"),
-                  ' а на странице -', last_news.find_element_by_tag_name('time').get_attribute('datetime').strip()
+            print 'Некорректная дата публикации, нужно - ', time.strftime("%d-%m-%Y")
+            print 'На странице -', last_news.find_element_by_tag_name('time').get_attribute('datetime').strip()
             print '*'*80
 	
         #проверяем заголовок новости на странице новостей
         if TEST_NEWS['header'] != last_news.find_element_by_tag_name('a').text:
             cnt += 1
-            print 'Некорректный заголовок новости, нужно - ', TEST_NEWS['header'],
-                  ' а на странице -', last_news.find_element_by_tag_name('a').text
+            print 'Некорректный заголовок новости, нужно - ', TEST_NEWS['header']
+            print 'Hа странице -', last_news.find_element_by_tag_name('a').text
             print '*'*80
 
         #проверяем анонс новости на странице новостей
         if TEST_NEWS['anons'] != last_news.find_element_by_tag_name('p').text:
             cnt += 1
-            print 'Некорректный анонс новости, нужно - ', TEST_NEWS['anons'],
-                  ' а на странице -', last_news.find_element_by_tag_name('p').text
+            print 'Некорректный анонс новости, нужно - ', TEST_NEWS['anons']
+            print 'Hа странице -', last_news.find_element_by_tag_name('p').text
             print '*'*80
 
         #переходим на страницу новости
@@ -118,21 +118,21 @@ class NewsAddTest(unittest.TestCase):
         if time.strftime("%d-%m-%Y") != last_news.find_element_by_tag_name('time').get_attribute('datetime').strip():
             cnt += 1
             print 'Некорректная дата публикации на странице новости, нужно - ', time.strftime("%d-%m-%Y"),
-                  ' а на странице -', last_news.find_element_by_tag_name('time').get_attribute('datetime').strip()
+            print 'Hа странице -', last_news.find_element_by_tag_name('time').get_attribute('datetime').strip()
             print '*'*80
 	
         #проверяем заголовок новости на странице новости
         if TEST_NEWS['header'] != last_news.find_element_by_tag_name('h1').text:
             cnt += 1
             print 'Некорректный заголовок новости на странице новости, нужно - ', TEST_NEWS['header'],
-                  ' а на странице -', last_news.find_element_by_tag_name('h1').text
+            print 'Hа странице -', last_news.find_element_by_tag_name('h1').text
             print '*'*80
 
         #проверяем анонс новости на странице новости
         if TEST_NEWS['text'] != last_news.find_element_by_tag_name('p').text:
             cnt += 1
             print 'Некорректный текст на странице новости, нужно - ', TEST_NEWS['text'],
-                  ' а на странице -', last_news.find_element_by_tag_name('p').text
+            print 'Hа странице -', last_news.find_element_by_tag_name('p').text
             print '*'*80
 
         assert cnt==0, ('Errors: %d' % cnt)
