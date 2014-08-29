@@ -4,6 +4,9 @@ import unittest
 import sys
 import os, time
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 class NewsAddTest(unittest.TestCase):
     
@@ -83,10 +86,9 @@ class NewsAddTest(unittest.TestCase):
 
 	#переходим на страницу новостей, чтобы проверить текст анонса
 	self.driver.get('%snews/' % self.SITE)
-	time.sleep(5)
 
 	#выбираем последнюю новость
-	last_news = self.driver.find_element_by_class_name('news-list__item')
+	last_news = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'news-list__item')))
 
 	#проверяем дату публикации на странице новостей
         if time.strftime("%d-%m-%Y") != last_news.find_element_by_tag_name('time').get_attribute('datetime').strip():
@@ -113,7 +115,7 @@ class NewsAddTest(unittest.TestCase):
         last_news.find_element_by_tag_name('a').click()
 
         #ссылаемся на новый объект
-        last_news = self.driver.find_element_by_tag_name('article')
+        last_news = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'article')))
 
         #проверяем дату публикации на странице новости
         if time.strftime("%d-%m-%Y") != last_news.find_element_by_tag_name('time').get_attribute('datetime').strip():
