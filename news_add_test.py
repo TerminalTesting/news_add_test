@@ -35,7 +35,7 @@ class NewsAddTest(unittest.TestCase):
         self.driver.find_element_by_class_name('btn-primary').click()
         self.driver.get('%sterminal/admin/' % self.SITE)
         time.sleep(5)
-        self.driver.find_element_by_partial_link_text(u'тестовый режим').click()
+        #self.driver.find_element_by_partial_link_text(u'тестовый режим').click()
         self.driver.get('%sterminal/admin/site/terminal/tnews/list' % self.SITE)
         self.driver.find_element_by_link_text(u'Добавить новый').click()
 
