@@ -134,7 +134,7 @@ class NewsAddTest(unittest.TestCase):
             print '*'*80
 
         #проверяем анонс новости на странице новости
-        if self.TEST_NEWS['text'] != last_news.find_element_by_tag_name('p')[1].text:
+        if self.TEST_NEWS['text'] != last_news.find_elements_by_tag_name('p')[1].text:
             cnt += 1
             print 'Некорректный текст на странице новости, нужно - ', self.TEST_NEWS['text']
             print 'Hа странице -', last_news.find_elements_by_tag_name('p')[1].text
