@@ -151,7 +151,7 @@ class NewsAddTest(unittest.TestCase):
             cnt += 1
             print 'Новость не удалилась'
             print '*'*80
-        else:
+        except:
             pass
 
         assert cnt==0, ('Errors: %d\nnews_id:%s' % cnt, news_id)
