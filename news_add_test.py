@@ -84,6 +84,8 @@ class NewsAddTest(unittest.TestCase):
 	#сохранение данных
 	self.driver.find_element_by_class_name('btn-primary').click()
 
+	news_url = self.driver.current_url
+
 	#переходим на страницу новостей, чтобы проверить текст анонса
 	self.driver.get('%snews/' % self.SITE)
 
@@ -120,24 +122,38 @@ class NewsAddTest(unittest.TestCase):
         #проверяем дату публикации на странице новости
         if time.strftime("%d-%m-%Y") != last_news.find_element_by_tag_name('time').get_attribute('datetime').strip():
             cnt += 1
-            print 'Некорректная дата публикации на странице новости, нужно - ', time.strftime("%d-%m-%Y"),
+            print 'Некорректная дата публикации на странице новости, нужно - ', time.strftime("%d-%m-%Y")
             print 'Hа странице -', last_news.find_element_by_tag_name('time').get_attribute('datetime').strip()
             print '*'*80
 	
         #проверяем заголовок новости на странице новости
         if self.TEST_NEWS['header'] != last_news.find_element_by_tag_name('h1').text:
             cnt += 1
-            print 'Некорректный заголовок новости на странице новости, нужно - ', TEST_NEWS['header'],
+            print 'Некорректный заголовок новости на странице новости, нужно - ', TEST_NEWS['header']
             print 'Hа странице -', last_news.find_element_by_tag_name('h1').text
             print '*'*80
 
         #проверяем анонс новости на странице новости
         if self.TEST_NEWS['text'] != last_news.find_element_by_tag_name('p').text:
             cnt += 1
-            print 'Некорректный текст на странице новости, нужно - ', self.TEST_NEWS['text'],
-            print 'Hа странице -', last_news.find_element_by_tag_name('p').text
+            print 'Некорректный текст на странице новости, нужно - ', self.TEST_NEWS['text']
+            print 'Hа странице -', last_news.find_elements_by_tag_name('p')[1].text
             print '*'*80
 
-        assert cnt==0, ('Errors: %d' % cnt)
+        self.driver.get(news_url)
+        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.LINK_TEXT, u'Удалить'))).click()
+        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'input[class="btn-danger"]'))).click()
+
+        news_id = news_url[len(self.SITE):].split('/')[5]
+
+        try:
+            WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.LINK_TEXT, news_id)))
+            cnt += 1
+            print 'Новость не удалилась'
+            print '*'*80
+        else:
+            pass
+
+        assert cnt==0, ('Errors: %d\nnews_id:' % cnt, news_id)
         
        
