@@ -40,7 +40,7 @@ class NewsAddTest(unittest.TestCase):
         self.driver.find_element_by_link_text(u'Добавить новый').click()
 
         #добавляем заголовок новости
-        self.driver.find_element_by_css_selector('input[id*="_name"]').send_keys(TEST_NEWS['header'])
+        self.driver.find_element_by_css_selector('input[id*="_name"]').send_keys(self.TEST_NEWS['header'])
 
         #берем текущую дату
         current = time.strftime("%Y/%m/%d").split('/')
@@ -69,12 +69,12 @@ class NewsAddTest(unittest.TestCase):
 	self.driver.find_element_by_css_selector('input[id*="_cities_1"]').click()
 
         #Заполняем анонс новости(сообщение выводящееся на странице новостей)
-	self.driver.find_element_by_css_selector('textarea[id*="_anounce"]').send_keys(TEST_NEWS['anons'])
+	self.driver.find_element_by_css_selector('textarea[id*="_anounce"]').send_keys(self.TEST_NEWS['anons'])
 
 	#переключаемся на фрейм, т.к. контент ckeditor`а во фрейме
 	self.driver.switch_to_frame(driver.find_element_by_tag_name("iframe"))
 	#добавляем скриптом текст новости в тег p
-	self.driver.execute_script('document.getElementsByTagName("p")[0].innerHTML = "%s";' % TEST_NEWS['text'])
+	self.driver.execute_script('document.getElementsByTagName("p")[0].innerHTML = "%s";' % self.TEST_NEWS['text'])
 
         #переключение в основной контент из фрейма
 	self.driver.switch_to_default_content()
@@ -97,14 +97,14 @@ class NewsAddTest(unittest.TestCase):
         #проверяем заголовок новости на странице новостей
         if TEST_NEWS['header'] != last_news.find_element_by_tag_name('a').text:
             cnt += 1
-            print 'Некорректный заголовок новости, нужно - ', TEST_NEWS['header']
+            print 'Некорректный заголовок новости, нужно - ', self.TEST_NEWS['header']
             print 'Hа странице -', last_news.find_element_by_tag_name('a').text
             print '*'*80
 
         #проверяем анонс новости на странице новостей
         if TEST_NEWS['anons'] != last_news.find_element_by_tag_name('p').text:
             cnt += 1
-            print 'Некорректный анонс новости, нужно - ', TEST_NEWS['anons']
+            print 'Некорректный анонс новости, нужно - ', self.TEST_NEWS['anons']
             print 'Hа странице -', last_news.find_element_by_tag_name('p').text
             print '*'*80
 
@@ -131,7 +131,7 @@ class NewsAddTest(unittest.TestCase):
         #проверяем анонс новости на странице новости
         if TEST_NEWS['text'] != last_news.find_element_by_tag_name('p').text:
             cnt += 1
-            print 'Некорректный текст на странице новости, нужно - ', TEST_NEWS['text'],
+            print 'Некорректный текст на странице новости, нужно - ', self.TEST_NEWS['text'],
             print 'Hа странице -', last_news.find_element_by_tag_name('p').text
             print '*'*80
 
