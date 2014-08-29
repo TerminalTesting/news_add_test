@@ -63,7 +63,7 @@ class NewsAddTest(unittest.TestCase):
 	endDate_year = self.driver.find_element_by_css_selector('select[id*="_endDate_year"]')
 	for ey in endDate_year.find_elements_by_tag_name('option'):
             if ey.text == '2019':#change to maximal year parameter
-		er.click()
+		ey.click()
 
         #выбираем Новосибирск, в последствии можно добавить проверку и по городам
 	self.driver.find_element_by_css_selector('input[id*="_cities_1"]').click()
