@@ -72,7 +72,7 @@ class NewsAddTest(unittest.TestCase):
 	self.driver.find_element_by_css_selector('textarea[id*="_anounce"]').send_keys(self.TEST_NEWS['anons'])
 
 	#переключаемся на фрейм, т.к. контент ckeditor`а во фрейме
-	self.driver.switch_to_frame(driver.find_element_by_tag_name("iframe"))
+	self.driver.switch_to_frame(self.driver.find_element_by_tag_name("iframe"))
 	#добавляем скриптом текст новости в тег p
 	self.driver.execute_script('document.getElementsByTagName("p")[0].innerHTML = "%s";' % self.TEST_NEWS['text'])
 
@@ -95,14 +95,14 @@ class NewsAddTest(unittest.TestCase):
             print '*'*80
 	
         #проверяем заголовок новости на странице новостей
-        if TEST_NEWS['header'] != last_news.find_element_by_tag_name('a').text:
+        if self.TEST_NEWS['header'] != last_news.find_element_by_tag_name('a').text:
             cnt += 1
             print 'Некорректный заголовок новости, нужно - ', self.TEST_NEWS['header']
             print 'Hа странице -', last_news.find_element_by_tag_name('a').text
             print '*'*80
 
         #проверяем анонс новости на странице новостей
-        if TEST_NEWS['anons'] != last_news.find_element_by_tag_name('p').text:
+        if self.TEST_NEWS['anons'] != last_news.find_element_by_tag_name('p').text:
             cnt += 1
             print 'Некорректный анонс новости, нужно - ', self.TEST_NEWS['anons']
             print 'Hа странице -', last_news.find_element_by_tag_name('p').text
@@ -122,14 +122,14 @@ class NewsAddTest(unittest.TestCase):
             print '*'*80
 	
         #проверяем заголовок новости на странице новости
-        if TEST_NEWS['header'] != last_news.find_element_by_tag_name('h1').text:
+        if self.TEST_NEWS['header'] != last_news.find_element_by_tag_name('h1').text:
             cnt += 1
             print 'Некорректный заголовок новости на странице новости, нужно - ', TEST_NEWS['header'],
             print 'Hа странице -', last_news.find_element_by_tag_name('h1').text
             print '*'*80
 
         #проверяем анонс новости на странице новости
-        if TEST_NEWS['text'] != last_news.find_element_by_tag_name('p').text:
+        if self.TEST_NEWS['text'] != last_news.find_element_by_tag_name('p').text:
             cnt += 1
             print 'Некорректный текст на странице новости, нужно - ', self.TEST_NEWS['text'],
             print 'Hа странице -', last_news.find_element_by_tag_name('p').text
