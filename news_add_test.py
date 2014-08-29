@@ -136,8 +136,8 @@ class NewsAddTest(unittest.TestCase):
         #проверяем анонс новости на странице новости
         if self.TEST_NEWS['text'] != last_news.find_element_by_tag_name('p').text:
             cnt += 1
-            print 'Некорректный текст на странице новости, нужно - ', self.TEST_NEWS['text']
-            print 'Hа странице -', last_news.find_elements_by_tag_name('p')[1].text
+            print 'Некорректный текст на странице новости, нужно - ', self.TEST_NEWS['text'], len(self.TEST_NEWS['text'])
+            print 'Hа странице -', last_news.find_elements_by_tag_name('p')[1].text, len(last_news.find_elements_by_tag_name('p')[1].text)
             print '*'*80
 
         self.driver.get(news_url)
