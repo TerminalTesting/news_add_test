@@ -83,6 +83,7 @@ class NewsAddTest(unittest.TestCase):
 
 	#переходим на страницу новостей, чтобы проверить текст анонса
 	self.driver.get('%snews/' % self.SITE)
+	time.sleep(5)
 
 	#выбираем последнюю новость
 	last_news = self.driver.find_element_by_class_name('news-list__item')
