@@ -154,6 +154,6 @@ class NewsAddTest(unittest.TestCase):
         else:
             pass
 
-        assert cnt==0, ('Errors: %d\nnews_id:' % cnt, news_id)
+        assert cnt==0, ('Errors: %d\nnews_id:%s' % cnt, news_id)
         
        
