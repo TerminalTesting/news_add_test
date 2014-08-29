@@ -142,7 +142,7 @@ class NewsAddTest(unittest.TestCase):
 
         self.driver.get(news_url)
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.LINK_TEXT, u'Удалить'))).click()
-        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.LINK_TEXT, u'Да, удалить'))).click()
+        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'input.btn.btn-danger'))).click()
 
         news_id = news_url[len(self.SITE):].split('/')[5]
 
