@@ -134,15 +134,15 @@ class NewsAddTest(unittest.TestCase):
             print '*'*80
 
         #проверяем анонс новости на странице новости
-        if self.TEST_NEWS['text'] != last_news.find_element_by_tag_name('p').text:
+        if self.TEST_NEWS['text'] != last_news.find_element_by_tag_name('p')[1].text:
             cnt += 1
-            print 'Некорректный текст на странице новости, нужно - ', self.TEST_NEWS['text'], len(self.TEST_NEWS['text'])
-            print 'Hа странице -', last_news.find_elements_by_tag_name('p')[1].text, len(last_news.find_elements_by_tag_name('p')[1].text)
+            print 'Некорректный текст на странице новости, нужно - ', self.TEST_NEWS['text']
+            print 'Hа странице -', last_news.find_elements_by_tag_name('p')[1].text
             print '*'*80
 
         self.driver.get(news_url)
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.LINK_TEXT, u'Удалить'))).click()
-        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'input[class="btn-danger"]'))).click()
+        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.LINK_TEXT, u'Да, удалить'))).click()
 
         news_id = news_url[len(self.SITE):].split('/')[5]
 
