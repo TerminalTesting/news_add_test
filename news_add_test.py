@@ -17,7 +17,7 @@ class NewsAddTest(unittest.TestCase):
         self.SITE = 'http://nsk.%s/' % os.getenv('SITE')
         self.ARTSOURCE = '%sartifact/' % os.getenv('BUILD_URL')
         self.driver = webdriver.Firefox()
-        self.driver.implicitly_wait(15)
+        self.driver.implicitly_wait(5)
 
         self.TEST_NEWS = {'header': 'AUTOTEST NEWS HEADER',
                           'anons': 'Autotest news anons',
