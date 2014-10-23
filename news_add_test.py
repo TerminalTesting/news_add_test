@@ -81,6 +81,7 @@ class NewsAddTest(unittest.TestCase):
         element(By.ID, 'username').send_keys(os.getenv('AUTH'))
         element(By.ID, 'password').send_keys(os.getenv('AUTHPASS'))
         element(By.CLASS_NAME, 'btn-primary').click()
+        time.sleep(5)
         driver.get('%sterminal/admin/' % self.SITE)
         element(By.PARTIAL_LINK_TEXT, u'тестовый режим').click()
         driver.get('%sterminal/admin/site/terminal/tnews/list' % self.SITE)
